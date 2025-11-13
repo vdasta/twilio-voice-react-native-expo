@@ -8,5 +8,5 @@
 
 |  Package | Description |
 |  --- | --- |
-|  [@twilio/voice-react-native-sdk](./voice-react-native-sdk.md) | Provides access to Twilio Programmable Voice for React Native applications running on iOS and Android devices. |
+|  [@simplevox/twilio-voice-expo](./twilio-voice-expo.md) | Provides access to Twilio Programmable Voice for React Native applications running on iOS and Android devices. |
 
