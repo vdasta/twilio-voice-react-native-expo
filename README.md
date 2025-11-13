@@ -11,6 +11,21 @@ Twilio's Voice React Native SDK allows you to add real-time voice and PSTN calli
 
 This SimpleVox-maintained fork tracks upstream `twilio/twilio-voice-react-native`. The current release is based on upstream tag [`1.7.0`](https://github.com/twilio/twilio-voice-react-native/tree/1.7.0) (`b26e7829`). Future updates will continue to merge upstream tags into this branch before applying any fork-specific adjustments.
 
+### Expo Compatibility
+
+This fork provides **Expo support** for iOS and Android platforms using a hybrid approach:
+
+- **iOS**: Includes an Expo Config Plugin that automatically configures required permissions and capabilities
+- **Android**: Uses standard React Native module (works with Expo development builds)
+- **Tested with**: Expo SDK 53 (RN 0.79) and Expo SDK 54 (RN 0.81)
+- **Built with**: React Native 0.72.9 (matching upstream)
+
+This approach provides Expo compatibility while maintaining alignment with upstream Twilio SDK updates.
+
+**📚 Documentation:**
+- **Users**: See [EXPO_IMPLEMENTATION.md](./EXPO_IMPLEMENTATION.md) for installation and setup
+- **Maintainers**: See [MAINTAINER_QUICKSTART.md](./MAINTAINER_QUICKSTART.md) for development workflows
+
 Please check out the following if you are new to Twilio's Programmable Voice or React Native.
 
 - [Programmable Voice](https://www.twilio.com/docs/voice/sdks)

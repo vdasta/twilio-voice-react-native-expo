@@ -1,10 +1,41 @@
-1.7.0-svox.1 (October 8, 2025)
+1.7.0-svox.1 (November 13, 2025)
 =============================
 
-## Notes
+## SimpleVox Fork Release
 
-- Fork release synced with upstream `twilio/twilio-voice-react-native` tag `1.7.0`.
-- No fork-specific code changes beyond documentation and metadata updates.
+This release provides Expo support for the Twilio Voice React Native SDK using a hybrid approach.
+
+### Features
+
+- **Expo SDK 53 & 54 Support**: Tested and compatible with Expo SDK 53 (RN 0.79) and SDK 54 (RN 0.81)
+- **iOS Expo Config Plugin**: Automatic configuration of required permissions and capabilities
+- **Development Build Compatible**: Works with Expo development builds (not Expo Go)
+- **Upstream Alignment**: Based on upstream Twilio SDK v1.7.0
+
+### Implementation
+
+- iOS: Expo Config Plugin (`plugin/withTwilioVoiceIos.cjs`)
+- Android: Standard React Native module (compatible with Expo development builds)
+- No Expo Modules API implementation (uses standard RN bridge)
+
+### Documentation
+
+- Added `EXPO_IMPLEMENTATION.md` with comprehensive guide for users and maintainers
+- Updated README with Expo compatibility information
+- Documented versioning strategy and release process
+
+### Technical Details
+
+- Built with React Native 0.72.9 (matching upstream)
+- Forward compatible with RN 0.79+ via flexible peer dependencies
+- Fixed TypeScript check to exclude test app files
+- Resolved api-documenter package installation issues
+
+### Notes
+
+- Synced with upstream `twilio/twilio-voice-react-native` tag `1.7.0`
+- Requires Expo development builds (not compatible with Expo Go)
+- See `EXPO_IMPLEMENTATION.md` for detailed setup and usage instructions
 
 1.7.0 (October 8, 2025)
 =======================
