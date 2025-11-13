@@ -11,12 +11,10 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => "11.0" }
-  s.source       = { :git => "https://github.com/mhuynh5757/twilio-voice-react-native.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/simplevox/twilio-voice-react-native-expo.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm}"
 
   s.dependency "React-Core"
-  s.dependency "TwilioVoice", "6.12.1"
-  s.xcconfig  =  { 'VALID_ARCHS' => 'arm64 x86_64' }
-  s.pod_target_xcconfig   = { 'VALID_ARCHS[sdk=iphoneos*]' => 'arm64', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'arm64 x86_64' }
+  s.dependency "TwilioVoice", "6.13.3"
 end

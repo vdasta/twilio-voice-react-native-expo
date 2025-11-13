@@ -6,14 +6,23 @@ const {
 const fs = require('fs');
 const path = require('path');
 
+const DEFAULT_MICROPHONE_USAGE_DESCRIPTION =
+  'SimpleVox needs microphone access to make and receive business calls.';
+const TWILIO_VOICE_POD = "pod 'TwilioVoice', '6.13.3'";
+
 function ensureBackgroundModes(existing = [], required = []) {
-  const set = new Set([...existing, ...required]);
+  const set = new Set([...(existing || []), ...required]);
   return Array.from(set);
 }
 
-module.exports = function withTwilioVoiceIos(config) {
+module.exports = function withTwilioVoiceIos(config, options = {}) {
+  const {
+    apsEnvironment = 'production',
+    microphonePermission = DEFAULT_MICROPHONE_USAGE_DESCRIPTION,
+  } = options;
+
   config = withEntitlementsPlist(config, (c) => {
-    c.modResults['aps-environment'] = 'production'; // TODO: make configurable if needed
+    c.modResults['aps-environment'] = apsEnvironment;
     return c;
   });
 
@@ -22,28 +31,29 @@ module.exports = function withTwilioVoiceIos(config) {
       c.modResults.UIBackgroundModes,
       ['voip', 'audio']
     );
-    c.modResults.NSMicrophoneUsageDescription =
-      c.modResults.NSMicrophoneUsageDescription ||
-      'SimpleVox needs microphone access to make and receive business calls.';
+
+    if (!c.modResults.NSMicrophoneUsageDescription) {
+      c.modResults.NSMicrophoneUsageDescription = microphonePermission;
+    }
+
     return c;
   });
 
   config = withDangerousMod(config, [
     'ios',
-    (config) => {
-      const podfilePath = path.join(config.modRequest.platformProjectRoot, 'Podfile');
+    (c) => {
+      const podfilePath = path.join(c.modRequest.platformProjectRoot, 'Podfile');
       let contents = fs.readFileSync(podfilePath, 'utf-8');
 
-      const podLine = `pod 'TwilioVoice', '~> 6.2'`;
-      if (!contents.includes(podLine)) {
+      if (!contents.includes(TWILIO_VOICE_POD)) {
         contents = contents.replace(
           /use_expo_modules!/,
-          `use_expo_modules!\n  ${podLine}`
+          `use_expo_modules!\n  ${TWILIO_VOICE_POD}`
         );
         fs.writeFileSync(podfilePath, contents);
       }
 
-      return config;
+      return c;
     },
   ]);
 
